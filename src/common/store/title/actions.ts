@@ -1,7 +1,4 @@
-export interface Action {
-    type: string;
-    data: any;
-}
+import { Action } from "..";
 
 export const changeTitle = (newTitle: string): Action => ({
     type: "CHANGE_TITLE",

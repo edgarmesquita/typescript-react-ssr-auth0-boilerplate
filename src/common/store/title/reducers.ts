@@ -1,5 +1,4 @@
-import { Action } from "../action";
-import { Store, initialState } from "../store";
+import { Action, Store, initialState } from "..";
 
 export function changeTitle(
     state: Store = initialState,

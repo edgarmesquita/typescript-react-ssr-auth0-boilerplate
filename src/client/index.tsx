@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import App from "common/App";
 import theme from "common/theme";
-import { changeTitle } from "common/redux/reducers/title";
+import { changeTitle } from "common/store/title/reducers";
 import createEmotionCache from "common/createEmotionCache";
 import { CssBaseline } from "@mui/material";
 
