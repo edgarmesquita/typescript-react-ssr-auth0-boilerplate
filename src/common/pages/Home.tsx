@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { changeTitle } from "common/store/title/actions";
 import { Store } from "common/store";
+import MainBar from "common/components/MainBar";
 
 interface HomeProps {
     title: string;
@@ -10,7 +11,9 @@ interface HomeProps {
 
 const Home = ({title, updateTitle}: HomeProps) => {
     return (
-        <div>test</div>
+        <div>
+            <MainBar />
+        </div>
     );
 }
 

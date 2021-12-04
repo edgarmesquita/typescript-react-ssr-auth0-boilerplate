@@ -12,20 +12,40 @@ import theme from "common/theme";
 import { changeTitle } from "common/store/title/reducers";
 import { CssBaseline } from "@mui/material";
 import createEmotionCache from "common/createEmotionCache";
+import * as users from "./api/users";
+import dotenv from "dotenv";
+import { auth } from "express-openid-connect";
 
 declare const module: any;
 
 function main() {
+
+    // initialize configuration
+    dotenv.config();
+
     const express = Express();
-    const port = 8080;
+    const port = process.env.SERVER_PORT;
 
     express.use(Express.static("build"));
+
+    // Configure auth
+    const config = {
+        authRequired: false,
+        auth0Logout: true,
+        secret: process.env.SECRET,
+        baseURL: process.env.BASE_URL,
+        clientID: process.env.CLIENT_ID,
+        issuerBaseURL: 'https://dev--ph6y342.us.auth0.com'
+    };
+    express.use(auth(config));
+
+    // Configure user api
+    users.register(express);
 
     express.get("/*", (req, res, next) => {
         const store = Redux.createStore(changeTitle);
         const cache = createEmotionCache();
-        const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-            createEmotionServer(cache);
+        const { extractCriticalToChunks, constructStyleTagsFromChunks } = createEmotionServer(cache);
 
         const appHTML = ReactDOM.renderToString(
             <ReduxProvider store={store}>
